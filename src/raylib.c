@@ -55,43 +55,43 @@ particle_t *create_particles(size_t *out_particles_len) {
   particles[1] = (particle_t){
     .mass = 2000.0,
     .position = v2d(GetRenderWidth() / 2.0, GetRenderHeight() / 2.0 + n++*gap),
-    .velocity = v2d(140.0, 0.0),
+    .velocity = v2d(140.0 + 20.0*(0.5-randd()), 0.0),
     .acceleration = v2dd(0.0),
   };
   particles[2] = (particle_t){
     .mass = 1000.0,
     .position = v2d(GetRenderWidth() / 2.0, GetRenderHeight() / 2.0 + n++*gap),
-    .velocity = v2d(140.0 / sqrt(1.5), 0.0),
+    .velocity = v2d(140.0 / sqrt(1.5) + 20.0*(0.5-randd()), 0.0),
     .acceleration = v2dd(0.0),
   };
   particles[3] = (particle_t){
     .mass = 700.0,
     .position = v2d(GetRenderWidth() / 2.0, GetRenderHeight() / 2.0 + n++*gap),
-    .velocity = v2d(140.0 / sqrt(2.0), 0.0),
+    .velocity = v2d(140.0 / sqrt(2.0) + 20.0*(0.5-randd()), 0.0),
     .acceleration = v2dd(0.0),
   };
   particles[4] = (particle_t){
     .mass = 1000.0,
     .position = v2d(GetRenderWidth() / 2.0, GetRenderHeight() / 2.0 + n++*gap),
-    .velocity = v2d(140.0 / sqrt(3.0), 0.0),
+    .velocity = v2d(140.0 / sqrt(3.0) + 20.0*(0.5-randd()), 0.0),
     .acceleration = v2dd(0.0),
   };
   particles[5] = (particle_t){
     .mass = 1000.0,
     .position = v2d(GetRenderWidth() / 2.0, GetRenderHeight() / 2.0 + n++*gap),
-    .velocity = v2d(140.0 / 2.0, 0.0),
+    .velocity = v2d(140.0 / 2.0 + 20.0*(0.5-randd()), 0.0),
     .acceleration = v2dd(0.0),
   };
   particles[6] = (particle_t){
-    .mass = 1.0,
+    .mass = 5.0,
     .position = v2d(GetRenderWidth() / 2.0, GetRenderHeight() / 2.0 + n++*gap),
-    .velocity = v2d(150.0 / 2.0, 0.0),
+    .velocity = v2d(150.0 / 2.0 + 20.0*(0.5-randd()), 0.0),
     .acceleration = v2dd(0.0),
   };
   particles[7] = (particle_t){
     .mass = 1000.0,
     .position = v2d(GetRenderWidth() / 2.0, GetRenderHeight() / 2.0 + n++*gap),
-    .velocity = v2d(140.0 / (2.0 * sqrt(2.0)), 0.0),
+    .velocity = v2d(140.0 / (2.0 * sqrt(2.0)) + 20.0*(0.5-randd()), 0.0),
     .acceleration = v2dd(0.0),
   };
 

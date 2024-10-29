@@ -6,8 +6,8 @@
 #include "mvla.h"
 #include "particle.h"
 
-#define MAX_TAIL_LEN 50
-#define TAIL_GROW_TICKS 120
+#define MAX_TAIL_LEN 30
+#define TAIL_GROW_TICKS 340
 
 /// An n-body simulation of particles
 typedef struct simulation {

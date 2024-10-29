@@ -4,7 +4,7 @@ BIN=nbody
 WORKDIR=$(pwd)
 BUILD=build
 CONFIG=Release
-CFLAGS="-O2 -Wall -Wextra -Wpedantic -Werror"
+CFLAGS="-O3 -Wall -Wextra -Wpedantic -Werror"
 
 function usage() {
   echo "Usage: ./launch.sh <ARG>"
@@ -16,11 +16,18 @@ function usage() {
   echo "  - clean               "
 }
 
+function profile() {
+  echo "Detecting profile..."
+  conan profile detect --force
+}
+
 function build() {
+  profile
+
   cd $WORKDIR
   
   echo "Building into $BUILD/..."
-  conan install . --output-folder=$BUILD --build=missing
+  conan install . -c tools.system.package_manager:mode=install --output-folder=$BUILD --build=missing
 
   echo "Entering $BUILD/..."
   cd $BUILD
@@ -70,8 +77,7 @@ function clean() {
 
 case $1 in
   profile)
-    echo "Detecting profile..."
-    conan profile detect --force
+    profile
     ;;
   build)
     build
