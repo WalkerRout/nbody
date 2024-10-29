@@ -12,7 +12,7 @@
 #include "simulation.h"
 
 #define WIDTH 1000
-#define HEIGHT 800
+#define HEIGHT 900
 
 /// We would like to normalize the momentum of the particles for this simulation
 void adjust_particle_momentum(particle_t *particles, size_t particles_len) {
@@ -111,13 +111,15 @@ void draw_simulation(const simulation_t *const sim) {
   ClearBackground(BLACK);
   DrawFPS(10, 10);
   for (size_t p = 0; p < sim->particles_len; ++p) {
+    // draw tail
     for (size_t t = 0; t < sim->tail_len; ++t) {
       size_t curr = p * MAX_TAIL_LEN + t;
       double x = sim->tail[curr].x;
       double y = sim->tail[curr].y;
-      DrawCircle(x, y, 2, GRAY);
-      DrawCircle(x, y, 2, GRAY);
+      DrawCircle(x, y, 2.0, GRAY);
+      DrawCircle(x, y, 2.0, GRAY);
     }
+    // draw this particle
     DrawCircle(
       sim->particles[p].position.x, sim->particles[p].position.y, 
       particle_rads[p],

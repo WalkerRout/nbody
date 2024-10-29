@@ -4,6 +4,7 @@ BIN=nbody
 WORKDIR=$(pwd)
 BUILD=build
 CONFIG=Release
+CFLAGS="-O2 -Wall -Wextra -Wpedantic -Werror"
 
 function usage() {
   echo "Usage: ./launch.sh <ARG>"
@@ -26,7 +27,7 @@ function build() {
 
   # export CMAKE_GENERATOR="Visual Studio 17 2022" to set default for CMake>=3.15
   echo "Generating build system using env CMAKE_GENERATOR=$CMAKE_GENERATOR..."
-  cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=$CONFIG
+  cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=$CONFIG -DCMAKE_C_FLAGS=$CFLAGS
   
   echo "Building with $CONFIG..."
   cmake --build . --config $CONFIG
@@ -79,8 +80,7 @@ case $1 in
     run
     ;;
   doit)
-    build
-    run
+    build && run
     ;;
   clean)
     clean
