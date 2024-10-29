@@ -131,8 +131,6 @@ int main(int argc, char *argv[]) {
   (void) argc;
   (void) argv;
 
-  // --- begin rendering simulation ---
-
   // create window
   InitWindow(WIDTH, HEIGHT, "nbody");
   SetTargetFPS(120);
