@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include <raylib.h>
 
@@ -15,6 +16,8 @@
 
 /// We would like to normalize the momentum of the particles for this simulation
 void adjust_particle_momentum(particle_t *particles, size_t particles_len) {
+  assert(particles != NULL);
+
   double momentum_x = 0.0, momentum_y = 0.0, total_mass = 0.0;
 
   for (size_t i = 0; i < particles_len; ++i) {
@@ -31,6 +34,8 @@ void adjust_particle_momentum(particle_t *particles, size_t particles_len) {
 
 /// Creates and returns array of particles
 particle_t *create_particles(size_t *out_particles_len) {
+  assert(out_particles_len != NULL);
+
   *out_particles_len = 8;
 
   particle_t *particles = calloc(*out_particles_len, sizeof(particle_t));
@@ -41,7 +46,6 @@ particle_t *create_particles(size_t *out_particles_len) {
 
   double n = 0.0;
   double gap = 50.0;
-
   particles[0] = (particle_t){
     .mass = 1000.0 * 1000.0,
     .position = v2d(GetRenderWidth() / 2.0, GetRenderHeight() / 2.0 + n++*gap),
@@ -98,12 +102,14 @@ particle_t *create_particles(size_t *out_particles_len) {
 
 /// Raylib specific rendering for the simulation
 void draw_simulation(const simulation_t *const sim) {
+  assert(sim != NULL);
+
   // kinda scuffed, but this is a tandem list with sim->particles -> particle radius
   double particle_rads[] = {10.0, 6.0, 4.0, 3.0, 4.0, 4.0, 1.0, 4.0};
 
   BeginDrawing();
   ClearBackground(BLACK);
-  DrawFPS(0, 0);
+  DrawFPS(10, 10);
   for (size_t p = 0; p < sim->particles_len; ++p) {
     for (size_t t = 0; t < sim->tail_len; ++t) {
       size_t curr = p * MAX_TAIL_LEN + t;

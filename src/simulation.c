@@ -34,19 +34,19 @@ void simulation_init_tail(
 
   sim->acceleration_deltas = calloc(particles_len, sizeof(double));
   if (sim->acceleration_deltas == NULL) {
-    fprintf(stderr, "Failed to allocate memory for acceleration_deltas.\n");
+    fprintf(stderr, "failed to allocate memory for acceleration_deltas\n");
     exit(EXIT_FAILURE);
   }
 
   sim->force_vectors = calloc(particles_len * particles_len, sizeof(v2d_t));
   if (sim->force_vectors == NULL) {
-    fprintf(stderr, "Failed to allocate memory for force_vectors.\n");
+    fprintf(stderr, "failed to allocate memory for force_vectors\n");
     exit(EXIT_FAILURE);
   }
 
   sim->radii = calloc(particles_len * particles_len, sizeof(double));
   if (sim->radii == NULL) {
-    fprintf(stderr, "Failed to allocate memory for radii.\n");
+    fprintf(stderr, "failed to allocate memory for radii\n");
     exit(EXIT_FAILURE);
   }
 
@@ -54,7 +54,7 @@ void simulation_init_tail(
     sim->tail_len = tail_len;
     sim->tail = calloc(particles_len * MAX_TAIL_LEN, sizeof(v2d_t));
     if (sim->tail == NULL) {
-      fprintf(stderr, "Failed to allocate memory for tail.\n");
+      fprintf(stderr, "failed to allocate memory for tail\n");
       exit(EXIT_FAILURE);
     }
   } else {
@@ -81,14 +81,11 @@ void simulation_tick(simulation_t *sim, double delta_time) {
 
 static inline void adjust_tail(simulation_t *sim) {
   assert(sim != NULL);
-  
   // particles len should never change
   const size_t particles_len = sim->particles_len;
-
   if (sim->ticks % TAIL_GROW_TICKS && sim->tail_len < MAX_TAIL_LEN) {
     sim->tail_len += 1;
   }
-
   size_t tail_section = (sim->ticks+1) % sim->tail_len;
   for (size_t i = 0; i < particles_len; ++i) {
     sim->tail[i * MAX_TAIL_LEN + tail_section] = sim->particles[i].position;
@@ -97,10 +94,8 @@ static inline void adjust_tail(simulation_t *sim) {
 
 static inline void adjust_deltas(simulation_t *sim) {
   assert(sim != NULL);
-  
   // particles len should never change
   const size_t particles_len = sim->particles_len;
-
   for (size_t i = 0; i < particles_len; ++i) {
     // reset acceleration to 0
     sim->particles[i].acceleration = v2dd(0.0);
@@ -131,10 +126,8 @@ static inline void adjust_deltas(simulation_t *sim) {
 
 static inline void adjust_particles(simulation_t *sim, double dt) {
   assert(sim != NULL);
-  
   // particles len should never change
   const size_t particles_len = sim->particles_len;
-
   for (size_t i = 0; i < sim->particles_len; ++i) {
     sim->particles[i].velocity = 
       v2d_add(sim->particles[i].velocity, v2d_mul(v2dd(dt), sim->particles[i].acceleration));
