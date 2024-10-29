@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "mvla.h"
 #include "particle.h"
 
 #define MAX_TAIL_LEN 50
